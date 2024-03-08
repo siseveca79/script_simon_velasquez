@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div>
+                    <button id="botton" type="submit">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        // Seleccionar el formulario
+        const formulario = document.getElementById('formulario');
+
+        // Agregar un evento 'submit' al formulario
+        formulario.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevenir el envío del formulario
+
+            // Obtener los valores de los campos
+            const nombre = document.getElementById('nombre').value;
+            const asunto = document.getElementById('asunto').value;
+            const mensaje = document.getElementById('mensaje').value;
+
+            // Expresión regular para validar caracteres alfabéticos
+            const regex = /^[a-zA-Z\s]*$/;
+
+            // Validar el nombre
+            if (!nombre.match(regex) || nombre.trim() === '') {
+                document.querySelector('.errorNombre').textContent = 'Nombre requiere';
+            } else {
+                document.querySelector('.errorNombre').textContent = '';
+            }
+
+            // Validar el asunto
+            if (!asunto.match(regex) || asunto.trim() === '') {
+                document.querySelector('.errorAsunto').textContent = 'Asunto requiere';
+            } else {
+                document.querySelector('.errorAsunto').textContent = '';
+            }
+
+            // Validar el mensaje
+            if (!mensaje.match(regex) || mensaje.trim() === '') {
+                document.querySelector('.errorMensaje').textContent = 'Mensaje requiere';
+            } else {
+                document.querySelector('.errorMensaje').textContent = '';
+            }
+
+            // Si todos los campos están completos y son válidos, mostrar mensaje de éxito
+            if (nombre.match(regex) && asunto.match(regex) && mensaje.match(regex) &&
+                nombre.trim() !== '' && asunto.trim() !== '' && mensaje.trim() !== '') {
+                document.querySelector('.resultado').textContent = 'Mensaje enviado con éxito';
+            }
+        });
+    </script>
+</body>
+
+</html>
